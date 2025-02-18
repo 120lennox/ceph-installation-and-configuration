@@ -62,6 +62,7 @@ SELINUX=disabled
 # Then reboot the system
 sudo reboot
 ```
+Instructions number 1 and 2 might not work if you're installing ceph on WSL. So you're free to skip them. Also, you might need to use `sudo` to run the commands.
 
 Step 3 - Configure Time Synchronization:
 1. Install and enable chrony on all hosts:
@@ -87,4 +88,3 @@ The ping tests in the second image confirm successful host name resolution betwe
 - ceph01 can reach ceph03 (192.168.0.23)
 - All pings are successful with 0% packet loss
 
-Would you like me to explain any of these steps in more detail before moving to the next page?
