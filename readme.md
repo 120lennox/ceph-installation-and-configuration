@@ -97,3 +97,54 @@ The ping tests in the second image confirm successful host name resolution betwe
 - ceph01 can reach ceph03 (192.168.0.23)
 - All pings are successful with 0% packet loss
 
+Once you have installed cephadm proceed with the following Instructions
+
+1. First, make the cephadm executable and move it to the right location:
+```bash
+cd openeuler-cephadm/cephadm
+chmod +x cephadm.bin
+cp cephadm.bin /usr/sbin/cephadm
+```
+
+2. Verify the installation by checking help information:
+```bash
+cephadm --help
+```
+You should see output similar to what's shown in the screenshot, with various commands like:
+- pull
+- inspect-image
+- list-networks
+- adopt
+- rm-daemon
+- run
+- shell
+etc.
+
+3. Next, set up the Ceph Yum repository by creating a new repo file:
+```bash
+cat > /etc/yum.repos.d/ceph.repo <<EOF
+[ceph_x86_64]
+name=ceph_x86_64
+baseurl=https://repo.huaweicloud.com/ceph/rpm-pacific/el8/x86_64
+enabled=1
+gpgcheck=0
+
+[ceph-noarch]
+name=ceph-noarch
+baseurl=https://repo.huaweicloud.com/ceph/rpm-pacific/el8/noarch
+enabled=1
+gpgcheck=0
+
+[ceph-source]
+name=ceph-source
+baseurl=https://repo.huaweicloud.com/ceph/rpm-pacific/el8/SRPMS
+enabled=1
+gpgcheck=0
+EOF
+```
+
+Note: if you're currently in WSL, these repositories might not be accessible immediately. When you move to Huawei ECS, these repositories will be important for installing and updating Ceph packages.
+
+
+
+
