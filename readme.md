@@ -82,6 +82,15 @@ Step 4 - Install Cephadm (on ceph01 only):
 ```bash
 git clone https://gitee.com/yftxa/openeuler-cephadm.git
 ```
+if the repo is not available or you're having problems, you can install cephadm manually as follows 
+
+```bash
+yum install -y cephadm 
+```
+or 
+```bash
+sudo dnf install -y cephadm
+```
 
 The ping tests in the second image confirm successful host name resolution between all nodes, showing:
 - ceph01 can reach ceph02 (192.168.0.22)
