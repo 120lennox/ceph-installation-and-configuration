@@ -45,3 +45,46 @@ sudo vi /etc/hosts
 ping ceph02.novalocal
 ping ceph03.novalocal
 ```
+
+Step 2 - Disable Firewall and SELinux:
+1. On all hosts, run:
+```bash
+systemctl disable firewalld
+systemctl stop firewalld
+```
+
+2. To disable SELinux:
+```bash
+# Edit the SELinux config file
+sudo vi /etc/selinux/config
+# Change SELINUX=enforcing to:
+SELINUX=disabled
+# Then reboot the system
+sudo reboot
+```
+
+Step 3 - Configure Time Synchronization:
+1. Install and enable chrony on all hosts:
+```bash
+yum install -y chrony
+systemctl enable chronyd --now
+```
+
+2. Verify time synchronization:
+```bash
+chronyc sources
+```
+The output should show time sources similar to the screenshot, with multiple NTP servers and low offset values.
+
+Step 4 - Install Cephadm (on ceph01 only):
+1. Clone the Cephadm repository:
+```bash
+git clone https://gitee.com/yftxa/openeuler-cephadm.git
+```
+
+The ping tests in the second image confirm successful host name resolution between all nodes, showing:
+- ceph01 can reach ceph02 (192.168.0.22)
+- ceph01 can reach ceph03 (192.168.0.23)
+- All pings are successful with 0% packet loss
+
+Would you like me to explain any of these steps in more detail before moving to the next page?
